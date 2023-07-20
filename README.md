@@ -3,9 +3,9 @@
 **Stage 1: Project Setup and Database Design**
 
 1. Page Name: Database Schema Design
-   - Functionality: Design the database schema to represent the four main entities: Hosts, Properties, Guests, and Bookings. Define their relationships and attributes.
-   - Backend API Endpoint: N/A (This is a planning and design phase)
-
+   - Functionality: The four main entities: Hosts, Properties, Guests, and Bookings.
+   - Tech Stack: Backend: Flask, Python
+   -              Frontend:
 **Stage 2: Backend Development**
 
 2. Page Name: Host Management
