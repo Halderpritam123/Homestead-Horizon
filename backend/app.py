@@ -16,14 +16,16 @@ class CustomJSONEncoder(json.JSONEncoder):
 
 app.json_encoder = CustomJSONEncoder
 class Host:
-    def __init__(self, name, email, phone):
+    def __init__(self, name, email, location, property_type, hosting_since):
         self._id = ObjectId()
         self.name = name
         self.email = email
-        self.phone = phone
+        self.location = location
+        self.property_type = property_type
+        self.hosting_since = hosting_since
 
 class Property:
-    def __init__(self, host_id, title, location, property_type, description, price_per_night):
+    def __init__(self, host_id, title, location,status, property_type, description, price_per_night):
         self._id = ObjectId()
         self.host_id = host_id
         self.title = title
@@ -31,6 +33,8 @@ class Property:
         self.property_type = property_type
         self.description = description
         self.price_per_night = price_per_night
+        self.status = status
+
 
 class Guest:
     def __init__(self, name, gender, date_of_birth, bio):
@@ -55,20 +59,38 @@ def index():
 # Host routes
 @app.route("/api/hosts", methods=["GET"])
 def get_all_hosts():
-    hosts = list(db.hosts.find())
-    return jsonify(hosts)
+    hosts = db.hosts.find()
+    res=[]
+    for host in hosts:
+        res.append({
+            "id":str(host["_id"]),
+            "name":str(host['name']),
+            "email": str(host['email']),
+            "location": str(host['location']),
+            "property_type":str(host['property_type']),
+            "hosting_since":str(host['hosting_since'])
+        })
+    return jsonify(res)
 
 @app.route("/api/hosts/<string:host_id>", methods=["GET"])
 def get_host(host_id):
     host = db.hosts.find_one({"_id": ObjectId(host_id)})
     if host:
-        return jsonify(host)
+        res={}
+# Convert ObjectId to string and store in 'res'
+        res["id"] = str(host["_id"])
+        res["name"] = str(host["name"])
+        res["email"] = str(host["email"])
+        res["location"] = str(host["location"])
+        res["property_type"] = str(host["property_type"])
+        res["hosting_since"] = str(host["hosting_since"])
+        return jsonify(res)
     return jsonify({"message": "Host not found"}), 404
 
 @app.route("/api/hosts", methods=["POST"])
 def create_host():
     data = request.get_json()
-    host = Host(name=data["name"], email=data["email"], phone=data["phone"])
+    host = Host(name=data["name"], email=data["email"], location=data["location"], property_type=data["property_type"],hosting_since=data["hosting_since"])
     db.hosts.insert_one(host.__dict__)
     return jsonify({"message": "Host created successfully"}), 201
 
@@ -88,14 +110,37 @@ def delete_host(host_id):
 # Property routes
 @app.route("/api/properties", methods=["GET"])
 def get_all_properties():
-    properties = list(db.properties.find())
-    return jsonify(properties)
+    properties =db.properties.find()
+    res=[]
+    for property in properties:
+        res.append({
+            "id":str(property["_id"]),
+            "title":str(property['title']),
+            "host_id": str(property['host_id']),
+            "location": str(property['location']),
+            "property_type":str(property['property_type']),
+            "description":str(property['description']),
+            "price_per_night":str(property['price_per_night']),
+            "status":str(property['status'])
+        })
+    return jsonify(res)
 
 @app.route("/api/properties/<string:property_id>", methods=["GET"])
 def get_property(property_id):
     property = db.properties.find_one({"_id": ObjectId(property_id)})
     if property:
-        return jsonify(property)
+
+        res={}
+# Convert ObjectId to string and store in 'res'
+        res["id"] = str(property["_id"])
+        res["title"] = str(property["title"])
+        res["host_id"] = str(property["host_id"])
+        res["location"] = str(property["location"])
+        res["property_type"] = str(property["property_type"])
+        res["description"] = str(property["description"])
+        res["price_per_night"] = str(property["price_per_night"])
+        res["status"] = bool(property["status"])
+        return jsonify(res)
     return jsonify({"message": "Property not found"}), 404
 
 @app.route("/api/properties", methods=["POST"])
@@ -107,7 +152,8 @@ def create_property():
         location=data["location"],
         property_type=data["property_type"],
         description=data["description"],
-        price_per_night=data["price_per_night"]
+        price_per_night=data["price_per_night"],
+        status=data["status"]
     )
     db.properties.insert_one(property.__dict__)
     return jsonify({"message": "Property created successfully"}), 201
@@ -128,14 +174,30 @@ def delete_property(property_id):
 # Guest routes
 @app.route("/api/guests", methods=["GET"])
 def get_all_guests():
-    guests = list(db.guests.find())
-    return jsonify(guests)
+    guests = db.guests.find()
+    res=[]
+    for guest in guests:
+        res.append({
+            "id":str(guest["_id"]),
+            "name":str(guest['name']),
+            "gender": str(guest['gender']),
+            "date_of_birth": str(guest['date_of_birth']),
+            "bio":str(guest['bio'])
+        })
+    return jsonify(res)
 
 @app.route("/api/guests/<string:guest_id>", methods=["GET"])
 def get_guest(guest_id):
     guest = db.guests.find_one({"_id": ObjectId(guest_id)})
     if guest:
-        return jsonify(guest)
+        res={}
+# Convert ObjectId to string and store in 'res'
+        res["id"] = str(guest["_id"])
+        res["name"] = str(guest["name"])
+        res["gender"] = str(guest["gender"])
+        res["date_of_birth"] = str(guest["date_of_birth"])
+        res["bio"] = str(guest["bio"])
+        return jsonify(res)
     return jsonify({"message": "Guest not found"}), 404
 
 @app.route("/api/guests", methods=["POST"])
@@ -166,14 +228,30 @@ def delete_guest(guest_id):
 # Booking routes
 @app.route("/api/bookings", methods=["GET"])
 def get_all_bookings():
-    bookings = list(db.bookings.find())
-    return jsonify(bookings)
+    bookings = db.bookings.find()
+    res=[]
+    for book in bookings:
+        res.append({
+            "id":str(book["_id"]),
+            "property_id":str(book['property_id']),
+            "guest_id": str(book['guest_id']),
+            "check_in_date": str(book['check_in_date']),
+            "check_out_date":str(book['check_out_date'])
+        })
+    return jsonify(res)
 
 @app.route("/api/bookings/<string:booking_id>", methods=["GET"])
 def get_booking(booking_id):
     booking = db.bookings.find_one({"_id": ObjectId(booking_id)})
     if booking:
-        return jsonify(booking)
+        res={}
+# Convert ObjectId to string and store in 'res'
+        res["id"] = str(booking["_id"])
+        res["property_id"] = str(booking["property_id"])
+        res["guest_id"] = str(booking["guest_id"])
+        res["check_in_date"] = str(booking["check_in_date"])
+        res["check_out_date"] = str(booking["check_out_date"])
+        return jsonify(res)
     return jsonify({"message": "Booking not found"}), 404
 
 @app.route("/api/bookings", methods=["POST"])
