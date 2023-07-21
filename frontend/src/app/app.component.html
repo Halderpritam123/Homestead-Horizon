@@ -1,0 +1,29 @@
+<!-- app.component.html -->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="#">Homestead Horizon</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/hosts" routerLinkActive="active">Hosts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/properties" routerLinkActive="active">Properties</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/guests" routerLinkActive="active">Guests</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/bookings" routerLinkActive="active">Bookings</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
