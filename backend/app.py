@@ -1,5 +1,3 @@
-
-
 from flask import Flask, request, jsonify, session
 from pymongo import MongoClient
 from flask_cors import CORS 
@@ -30,9 +28,12 @@ def verify_password(stored_hash, password):
 def is_host_authenticated():
     return session.get('user_role') == 'host'
 
+def is_guest_authenticated():
+    return session.get('user_role') == 'guest'
+
 # Property model class
 class Property:
-    def __init__(self, host_id, title, location, status, property_type, description, price_per_night):
+    def __init__(self, host_id, title, location, status, property_type, description, price_per_night, img):
         self._id = ObjectId()
         self.host_id = host_id
         self.title = title
@@ -41,6 +42,7 @@ class Property:
         self.description = description
         self.price_per_night = price_per_night
         self.status = status
+        self.img = img
 
 @app.route("/")
 def index():
@@ -191,7 +193,8 @@ def get_all_properties():
             "property_type": str(property['property_type']),
             "description": str(property['description']),
             "price_per_night": str(property['price_per_night']),
-            "status": str(property['status'])
+            "status": str(property['status']),
+            "img": str(property['img'])  # Add the 'img' field to the response
         })
 
     # Return the paginated and filtered properties
@@ -216,7 +219,8 @@ def get_property(property_id):
             "property_type": str(property["property_type"]),
             "description": str(property["description"]),
             "price_per_night": str(property["price_per_night"]),
-            "status": bool(property["status"])
+            "status": bool(property["status"]),
+            "img": str(property["img"])  # Add the 'img' field to the response
         }
         return jsonify(res)
     return jsonify({"message": "Property not found"}), 404
@@ -235,10 +239,12 @@ def create_property():
         property_type=data["property_type"],
         description=data["description"],
         price_per_night=data["price_per_night"],
-        status=data["status"]
+        status=data["status"],
+        img=data["img"]  # Add the 'img' field to the new Property object
     )
     db.properties.insert_one(property.__dict__)
     return jsonify({"message": "Property created successfully"}), 201
+
 
 @app.route("/api/properties/<string:property_id>", methods=["PUT"])
 def update_property(property_id):
@@ -264,8 +270,8 @@ def delete_property(property_id):
 # booking 
 @app.route("/api/properties/book", methods=["POST"])
 def post_property_to_book_collection():
-    # Only guests are allowed to post property data to the book collection
-    if is_host_authenticated():
+    # Check if the user is authenticated as a guest
+    if not is_guest_authenticated():
         return jsonify({"error": "Unauthorized"}), 401
 
     db = get_db()
@@ -285,8 +291,8 @@ def post_property_to_book_collection():
 
 @app.route("/api/properties/book/<string:book_id>", methods=["DELETE"])
 def delete_property_from_book_collection(book_id):
-    # Only guests are allowed to delete property data from the book collection
-    if is_host_authenticated():
+    # Check if the user is authenticated as a guest
+    if not is_guest_authenticated():
         return jsonify({"error": "Unauthorized"}), 401
 
     db = get_db()
