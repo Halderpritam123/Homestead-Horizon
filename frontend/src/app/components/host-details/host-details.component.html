@@ -1,18 +1,27 @@
-<!-- host-details.component.html -->
-<div *ngIf="host">
-    <h2>Host Details</h2>
-    <p><strong>Name:</strong> {{ host.name }}</p>
-    <p><strong>Email:</strong> {{ host.email }}</p>
-    <p><strong>Location:</strong> {{ host.location }}</p>
-    <p><strong>Property Type:</strong> {{ host.property_type }}</p>
-    <p><strong>Hosting Since:</strong> {{ host.hosting_since }}</p>
-    <button (click)="editHost()">Edit</button>
-    <button (click)="confirmDeleteHost()">Delete</button>
-    <button (click)="goBack()">Go Back</button>
-  </div>
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Host Details</h2>
+        <div class="card-text">
+          <p><strong>Name:</strong> {{ host?.name }}</p>
+          <p><strong>Email:</strong> {{ host?.email }}</p>
+          <p><strong>Location:</strong> {{ host?.location }}</p>
+          <p><strong>Property Type:</strong> {{ host?.property_type }}</p>
+          <p><strong>Hosting Since:</strong> {{ host?.hosting_since }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <button type="button" class="btn btn-primary" (click)="navigateToEditPage()">Edit Host</button>
+          <div>
+            <button class="btn btn-danger" (click)="confirmDeleteHost()">Delete</button>
+            <button class="btn btn-secondary" (click)="goBack()">Go Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
   
-  <div *ngIf="error">
-    <p>Error fetching host details: {{ error }}</p>
-    <button (click)="goBack()">Go Back</button>
+    <div *ngIf="error" class="mt-3">
+      <p class="alert alert-danger">Error fetching host details: {{ error }}</p>
+      <button class="btn btn-secondary" (click)="goBack()">Go Back</button>
+    </div>
   </div>
   

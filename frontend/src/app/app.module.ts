@@ -11,6 +11,9 @@ import { GuestDetailsComponent } from './components/guest-details/guest-details.
 import { BookingListComponent } from './components/booking-list/booking-list.component';
 import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HostEditComponent } from './host-edit/host-edit.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -22,12 +25,14 @@ import { AppRoutingModule } from './app-routing.module';
     GuestListComponent,
     GuestDetailsComponent,
     BookingListComponent,
-    BookingDetailsComponent
+    BookingDetailsComponent,
+    HostEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

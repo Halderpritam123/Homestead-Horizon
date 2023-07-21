@@ -1,16 +1,25 @@
-<div class="container">
-    <h1>Host List</h1>
-    <ul>
-      <li *ngFor="let host of hosts">
-        <p (click)="viewHostDetails(host.id)">{{ host.name }}</p>
-        <strong>{{ host.name }}</strong> ({{ host.email }})
-        <br>
-        Location: {{ host.location }}
-        <br>
-        Property Type: {{ host.property_type }}
-        <br>
-        Hosting Since: {{ host.hosting_since }}
-      </li>
-    </ul>
-  </div>
-  
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Host List</h1>
+  <ul class="list-group">
+    <li *ngFor="let host of hosts" class="list-group-item">
+      <div class="host-item" (click)="viewHostDetails(host.id)">
+        <div class="d-flex align-items-center">
+          <div class="host-avatar bg-primary text-white d-flex align-items-center justify-content-center">
+            {{ host.name[0].toUpperCase() }}
+          </div>
+          <div class="ml-3">
+            <div>
+              <strong>{{ host.name }}</strong>
+            </div>
+            <div class="text-muted small">
+              <div>Email: {{ host.email }}</div>
+              <div>Location: {{ host.location }}</div>
+              <div>Property Type: {{ host.property_type }}</div>
+              <div>Hosting Since: {{ host.hosting_since }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

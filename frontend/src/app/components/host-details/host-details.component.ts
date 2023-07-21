@@ -9,15 +9,9 @@ import { Host } from '../../models/host.model';
   styleUrls: ['./host-details.component.css']
 })
 export class HostDetailsComponent implements OnInit {
-  host: Host = { // Initialize the host object with empty values
-    id: '',
-    name: '',
-    email: '',
-    location: '',
-    property_type: '',
-    hosting_since: ''
-  };
+  host: Host | undefined;
   error: any;
+  hostEditModalOpened: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +27,7 @@ export class HostDetailsComponent implements OnInit {
     const hostId = this.route.snapshot.paramMap.get('id');
     if (hostId) {
       this.hostService.getHostById(hostId).subscribe(
-        (host: Host) => { // Explicitly define the type of 'host'
+        (host: Host) => {
           this.host = host;
         },
         (error) => {
@@ -43,9 +37,9 @@ export class HostDetailsComponent implements OnInit {
       );
     }
   }
-  editHost(): void {
-    // Navigate to the host edit page, passing the host ID as a route parameter
-    this.router.navigate(['/hosts', this.host.id, 'edit']);
+
+  navigateToEditPage(): void {
+    this.router.navigate(['/hosts_edit', this.host?.id], { state: { hostData: this.host } });
   }
 
   confirmDeleteHost(): void {
@@ -56,17 +50,18 @@ export class HostDetailsComponent implements OnInit {
   }
 
   deleteHost(): void {
-    const hostId = this.host.id;
-    this.hostService.deleteHost(hostId).subscribe(
-      () => {
-        // Host deleted successfully, navigate back to the host list
-        this.router.navigate(['/hosts']);
-      },
-      (error) => {
-        console.error('Error deleting host:', error);
-        this.error = error;
-      }
-    );
+    const hostId = this.host?.id;
+    if (hostId) {
+      this.hostService.deleteHost(hostId).subscribe(
+        () => {
+          this.router.navigate(['/hosts']);
+        },
+        (error) => {
+          console.error('Error deleting host:', error);
+          this.error = error;
+        }
+      );
+    }
   }
 
   goBack(): void {

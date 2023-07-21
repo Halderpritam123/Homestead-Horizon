@@ -10,6 +10,7 @@ import { GuestListComponent } from './components/guest-list/guest-list.component
 import { GuestDetailsComponent } from './components/guest-details/guest-details.component';
 import { BookingListComponent } from './components/booking-list/booking-list.component';
 import { BookingDetailsComponent } from './components/booking-details/booking-details.component';
+import { HostEditComponent } from './host-edit/host-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/hosts', pathMatch: 'full' }, // Default route to host list
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'hosts/:id', component: HostDetailsComponent },
   { path: 'properties', component: PropertyListComponent },
   { path: 'properties/:id', component: PropertyDetailsComponent },
-  { path: 'hosts/:id', component: HostDetailsComponent },
+  { path: 'host-details/:id', component: HostDetailsComponent },
+  { path: 'hosts_edit/:id', component: HostEditComponent },
   { path: 'guests', component: GuestListComponent },
   { path: 'guests/:id', component: GuestDetailsComponent },
   { path: 'bookings', component: BookingListComponent },
