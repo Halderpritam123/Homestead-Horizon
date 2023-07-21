@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'hosts/:id', component: HostDetailsComponent },
   { path: 'properties', component: PropertyListComponent },
   { path: 'properties/:id', component: PropertyDetailsComponent },
+  { path: 'hosts/:id', component: HostDetailsComponent },
   { path: 'guests', component: GuestListComponent },
   { path: 'guests/:id', component: GuestDetailsComponent },
   { path: 'bookings', component: BookingListComponent },

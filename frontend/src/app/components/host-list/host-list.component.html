@@ -1,1 +1,16 @@
-<p>host-list works!</p>
+<div class="container">
+    <h1>Host List</h1>
+    <ul>
+      <li *ngFor="let host of hosts">
+        <p (click)="viewHostDetails(host.id)">{{ host.name }}</p>
+        <strong>{{ host.name }}</strong> ({{ host.email }})
+        <br>
+        Location: {{ host.location }}
+        <br>
+        Property Type: {{ host.property_type }}
+        <br>
+        Hosting Since: {{ host.hosting_since }}
+      </li>
+    </ul>
+  </div>
+  

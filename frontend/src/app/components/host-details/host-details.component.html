@@ -1,1 +1,18 @@
-<p>host-details works!</p>
+<!-- host-details.component.html -->
+<div *ngIf="host">
+    <h2>Host Details</h2>
+    <p><strong>Name:</strong> {{ host.name }}</p>
+    <p><strong>Email:</strong> {{ host.email }}</p>
+    <p><strong>Location:</strong> {{ host.location }}</p>
+    <p><strong>Property Type:</strong> {{ host.property_type }}</p>
+    <p><strong>Hosting Since:</strong> {{ host.hosting_since }}</p>
+    <button (click)="editHost()">Edit</button>
+    <button (click)="confirmDeleteHost()">Delete</button>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+  
+  <div *ngIf="error">
+    <p>Error fetching host details: {{ error }}</p>
+    <button (click)="goBack()">Go Back</button>
+  </div>
+  
