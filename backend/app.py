@@ -198,12 +198,7 @@ def get_all_properties():
         })
 
     # Return the paginated and filtered properties
-    return jsonify({
-        "total_properties": total_properties,
-        "total_pages": total_pages,
-        "current_page": page,
-        "properties": res
-    })
+    return jsonify(res)
 
 
 @app.route("/api/properties/<string:property_id>", methods=["GET"])
