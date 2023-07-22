@@ -1,1 +1,74 @@
-<p>property-admin works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form (submit)="postProperty()" class="mb-3">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" [(ngModel)]="propertyData.title" name="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" class="form-control" id="location" [(ngModel)]="propertyData.location" name="location" required>
+        </div>
+        <div class="mb-3">
+          <label for="propertyType" class="form-label">Property Type</label>
+          <select class="form-select" id="propertyType" [(ngModel)]="propertyData.property_type" name="propertyType" required>
+            <option value="house">House</option>
+            <option value="apartment">Apartment</option>
+            <option value="villa">Villa</option>
+            <!-- Add other property types as needed -->
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" [(ngModel)]="propertyData.description" name="description" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="pricePerNight" class="form-label">Price per Night</label>
+          <input type="number" class="form-control" id="pricePerNight" [(ngModel)]="propertyData.price_per_night" name="pricePerNight" required>
+        </div>
+        <div class="mb-3">
+          <label for="imageURL" class="form-label">Image URL</label>
+          <input type="text" class="form-control" id="imageURL" [(ngModel)]="propertyData.img" name="imageURL" required>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="status" [(ngModel)]="propertyData.status" name="status">
+          <label class="form-check-label" for="status">Status</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Post Property</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Property Type</th>
+            <!-- <th>Description</th> -->
+            <th>Price per Night</th>
+            <!-- <th>Image URL</th> -->
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let property of properties">
+            <td>{{ property.title }}</td>
+            <td>{{ property.location }}</td>
+            <td>{{ property.property_type }}</td>
+            <!-- <td>{{ property.description }}</td> -->
+            <td>{{ property.price_per_night }}</td>
+            <!-- <td>{{ property.img }}</td> -->
+            <td>
+              <button class="btn btn-primary" (click)="viewProperty(property.id)">View Property</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

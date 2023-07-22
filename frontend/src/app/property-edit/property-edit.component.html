@@ -1,0 +1,45 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form (submit)="updateProperty()" class="mb-3">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" [(ngModel)]="property.title" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" [(ngModel)]="property.location" name="location" required>
+          </div>
+          <div class="mb-3">
+            <label for="propertyType" class="form-label">Property Type</label>
+            <select class="form-select" id="propertyType" [(ngModel)]="property.property_type" name="propertyType" required>
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+              <option value="villa">Villa</option>
+              <!-- Add other property types as needed -->
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" [(ngModel)]="property.description" name="description" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="pricePerNight" class="form-label">Price per Night</label>
+            <input type="number" class="form-control" id="pricePerNight" [(ngModel)]="property.price_per_night" name="pricePerNight" required>
+          </div>
+          <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <input type="checkbox" class="form-check-input" id="status" [(ngModel)]="property.status" name="status">
+          </div>
+          <div class="mb-3">
+            <label for="imageURL" class="form-label">Image URL</label>
+            <input type="text" class="form-control" id="imageURL" [(ngModel)]="property.img" name="imageURL" required>
+          </div>
+  
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

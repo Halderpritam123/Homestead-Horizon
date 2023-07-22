@@ -1,7 +1,6 @@
-// host.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-host',
@@ -13,7 +12,7 @@ export class HostComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,12 +21,17 @@ export class HostComponent implements OnInit {
     const loginData = { email: this.email, password: this.password };
     this.http.post<any>('http://localhost:5000/login/host', loginData).subscribe(
       (response: any) => {
-        console.log(response); // Handle successful login here, e.g., navigate to a different page
+        console.log(response);
+        localStorage.setItem('userRole', 'host'); // Set userRole to 'host'
+        localStorage.setItem('host_id', response.host_id);
         this.errorMessage = '';
+        alert('Login successful!');
+        this.router.navigate(['/property-admin']); // Redirect to the property admin page
       },
       (error) => {
         console.error(error);
         this.errorMessage = error.error.error || 'An error occurred during login.';
+        alert('Login failed. Please check your credentials and try again.');
       }
     );
   }
@@ -36,12 +40,14 @@ export class HostComponent implements OnInit {
     const signupData = { email: this.email, password: this.password };
     this.http.post<any>('http://localhost:5000/signup/host', signupData).subscribe(
       (response: any) => {
-        console.log(response); // Handle successful signup here, e.g., show a success message
+        console.log(response);
         this.errorMessage = '';
+        alert('Signup successful!');
       },
       (error) => {
         console.error(error);
         this.errorMessage = error.error.error || 'An error occurred during signup.';
+        alert('Signup failed. Please try again later.');
       }
     );
   }
