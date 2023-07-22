@@ -361,5 +361,11 @@ def delete_book_data(booking_id):
 
 
 
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_role', None)
+    return jsonify({"message": "Logout successful"}), 200
+
+
 if __name__ == '__main__':
     app.run(debug=True)

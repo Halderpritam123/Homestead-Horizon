@@ -7,9 +7,12 @@ import { HomeComponent } from './components/home/home.component';
 import { PropertyComponent } from './components/property/property.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { HostComponent } from './components/host/host.component';
-import { PostComponent } from './components/post/post.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FooterComponent } from './footer/footer.component'; 
+import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { GuestComponent } from './components/guest/guest.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PropertyAdminComponent } from './components/property-admin/property-admin.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { FooterComponent } from './footer/footer.component';
     PropertyComponent,
     BookingComponent,
     HostComponent,
-    PostComponent,
-    FooterComponent
+    FooterComponent,
+    GuestComponent,
+    PropertyAdminComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+/* guest.component.css */
+
+/* Background Image */
+.login-card {
+    background-image: url('/assets/background-image.jpg'); /* Update the path here */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Rest of the CSS styles and animations... */
+  
