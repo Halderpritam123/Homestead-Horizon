@@ -1,0 +1,46 @@
+/* preview.component.css */
+
+/* General styles */
+.property-details-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .property-details-card h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  .property-details-card p {
+    margin: 5px 0;
+  }
+  
+  .property-details-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .property-details-card label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .property-details-card input[type="date"] {
+    margin-bottom: 5px;
+  }
+  
+  .property-details-card .btn-secondary {
+    margin-right: 10px;
+  }
+  
+  .property-details-card .text-danger {
+    display: block;
+    margin-top: 10px;
+    color: #ff0000;
+    font-size: 14px;
+  }
+  

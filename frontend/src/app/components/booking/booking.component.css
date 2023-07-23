@@ -1,0 +1,69 @@
+/* book.component.css */
+
+/* General styles */
+.bookings-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .bookings-page h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .property-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .property-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .property-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .property-details {
+    padding: 20px;
+  }
+  
+  .property-details h2 {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  
+  .property-details p {
+    margin: 5px 0;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff1a1a;
+  }
+  

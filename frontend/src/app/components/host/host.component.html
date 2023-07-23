@@ -1,1 +1,31 @@
-<p>host works!</p>
+<!-- login.component.html -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card login-card">
+        <div class="card-header text-center" style="background-color: #252627; color: white; border-radius: 7px;">
+          <h2>Host Login</h2>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="text" id="email" class="form-control" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password:</label>
+              <input type="password" id="password" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary btn-login" (click)="login()">Login</button>
+              <button class="btn btn-secondary btn-signup" (click)="signup()">Sign Up</button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-muted text-center" style="background-color: #252627; border-radius: 0 0 7px 7px; color: white;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

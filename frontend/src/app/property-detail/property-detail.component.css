@@ -1,0 +1,67 @@
+/* property-detail.component.css */
+
+/* General styles */
+.container {
+    max-width: 1200px;
+  }
+  
+  .property-details-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .property-details-card h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  .property-details-card p {
+    margin: 5px 0;
+  }
+  
+  .property-details-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .property-details-card button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .property-details-card .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .property-details-card .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .property-details-card .btn-danger {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+  }
+  
+  .property-details-card .btn-danger:hover {
+    background-color: #ff1a1a;
+  }
+  
+  .property-details-card .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+  }
+  
+  .property-details-card .btn-secondary:hover {
+    background-color: #444;
+  }
+  

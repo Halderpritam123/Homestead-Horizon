@@ -1,0 +1,146 @@
+/* Add custom styles for form fields */
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+  
+  .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Add margin and padding to form elements */
+  .payment-details-card form {
+    margin-top: 20px;
+  }
+  
+  .payment-details-card h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Style for form buttons */
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  
+  /* Add padding and margin for steps navigation buttons */
+  .payment-details-card .btn {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .payment-details-card .me-2 {
+    margin-right: 10px;
+  }
+  
+  /* Add padding and margin for error messages */
+  .text-danger {
+    margin-top: 5px;
+  }
+/* custom.css */
+/* Add a background color to the payment details card */
+.payment-details-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  /* Add some padding to the payment details card */
+  .payment-details-card {
+    padding: 20px;
+  }
+  
+  /* Style the form labels */
+  .form-label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Style the form select options */
+  .form-select {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 6px;
+  }
+  
+  /* Style the form select options when focused */
+  .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Add some margin to the form fields */
+  .form-control,
+  .form-select {
+    margin-bottom: 10px;
+  }
+  
+  /* Add a border and box shadow to the payment confirmation card */
+  .confirmation-card {
+    border: 1px solid #d6d6d6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  /* Style the "Confirm Payment" heading */
+  .confirmation-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the "Total Price" in the confirmation card */
+  .confirmation-card p strong {
+    color: #007bff;
+  }
+  
+  /* Style the "Back" button in the confirmation card */
+  .confirmation-card .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+  }
+  
+  .confirmation-card .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  
+  /* Style the "Confirm Payment" button in the confirmation card */
+  .confirmation-card .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+  }
+  
+  .confirmation-card .btn-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  /* Add some margin to the buttons in the confirmation card */
+  .confirmation-card .btn {
+    margin-top: 10px;
+  }
+    
