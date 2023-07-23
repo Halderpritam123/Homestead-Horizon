@@ -1,0 +1,53 @@
+<!-- property-page.component.html -->
+<div class="property-page">
+  <div class="filters">
+    <input type="text" [(ngModel)]="titleFilter" (keyup)="applyFilters()" placeholder="Search by title">
+
+    <div class="filter-dropdowns">
+      <select [(ngModel)]="propertyTypeFilter" (change)="applyFilters()">
+        <option value="">All Property Types</option>
+        <option value="Apartment">Apartment</option>
+        <option value="House">House</option>
+        <option value="Villa">Villa</option>
+        <!-- Add other property types as needed -->
+      </select>
+
+      <select [(ngModel)]="locationFilter" (change)="applyFilters()">
+        <option value="">All Locations</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <!-- Add other locations as needed -->
+      </select>
+    </div>
+  </div>
+  <div class="sorting">
+    <span>Sort by:</span>
+    <label>
+      <input type="radio" [(ngModel)]="sortOrder" [value]="1" (change)="toggleSortDirection()"> Ascending
+    </label>
+    <label>
+      <input type="radio" [(ngModel)]="sortOrder" [value]="-1" (change)="toggleSortDirection()"> Descending
+    </label>
+    <!-- Add other sorting options as needed -->
+  </div>
+
+  <div class="property-grid">
+    <div class="property-card" *ngFor="let property of properties">
+      <div (click)="viewPreview(property.id)" class="property-details">
+        <img [src]="property.img" alt="Property Image" class="property-image">
+        <h2>{{ property.title }}</h2>
+        <p>{{ property.location }}</p>
+        <p>{{ property.property_type }}</p>
+        <p>{{ property.description.substring(1, 50) }}</p>
+        <p>Price per Night: {{ property.price_per_night }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" style="background-color: #252627; color: white;border: none;" class="btn btn-primary">Previous</button>
+    <span>{{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === 5" style="background-color: #252627; color: white;border: none;" class="btn btn-primary">Next</button>
+  </div>
+</div>

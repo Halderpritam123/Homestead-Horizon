@@ -1,0 +1,137 @@
+<!-- payment.component.html -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="payment-details-card p-4 shadow">
+                <h2 class="mb-4">Payment Details</h2>
+                <p><strong>Property Title:</strong> {{ propertyData.property_title }}</p>
+                <p><strong>Location:</strong> {{ propertyData.property_location }}</p>
+                <p><strong>Price per Night:</strong> {{ propertyData.price_per_night }}</p>
+                <p><strong>Book Date:</strong> {{ propertyData.book_date }}</p>
+                <p><strong>End Date:</strong> {{ propertyData.end_date }}</p>
+                <p><strong>Total Price:</strong> {{ propertyData.total_price }}</p>
+            </div>
+        </div>
+        <!-- payment.component.html -->
+        <div class="container mt-5" >
+            <div class="row justify-content-center">
+                <div class="col-md-8" >
+                    <div class="payment-details-card" style="border: 1px solid black;margin-bottom: 7%;">
+                        <h2>Payment Details</h2>
+                        <!-- Step 1: User Information -->
+                        <div *ngIf="currentStep === 1">
+                            <form [formGroup]="step1Form" (submit)="goToStep(2)">
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" formControlName="fullName"
+                                        required>
+                                    <div *ngIf="step1Form.controls['fullName'].invalid && (step1Form.controls['fullName'].dirty || step1Form.controls['fullName'].touched)"
+                                        class="text-danger">
+                                        Full name is required.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" formControlName="age" required>
+                                    <div *ngIf="step1Form.controls['age'].invalid && (step1Form.controls['age'].dirty || step1Form.controls['age'].touched)"
+                                        class="text-danger">
+                                        Age is required and must be a valid number.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" id="gender" formControlName="gender" required>
+                                        <option value="" disabled selected>Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div *ngIf="step1Form.controls['gender'].invalid && (step1Form.controls['gender'].dirty || step1Form.controls['gender'].touched)"
+                                        class="text-danger">
+                                        Gender is required.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mobileNo" class="form-label">Mobile No</label>
+                                    <input type="text" class="form-control" id="mobileNo" formControlName="mobileNo"
+                                        required>
+                                    <div *ngIf="step1Form.controls['mobileNo'].invalid && (step1Form.controls['mobileNo'].dirty || step1Form.controls['mobileNo'].touched)"
+                                        class="text-danger">
+                                        Mobile No is required.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailId" class="form-label">Email Id</label>
+                                    <input type="email" class="form-control" id="emailId" formControlName="emailId"
+                                        required>
+                                    <div *ngIf="step1Form.controls['emailId'].invalid && (step1Form.controls['emailId'].dirty || step1Form.controls['emailId'].touched)"
+                                        class="text-danger">
+                                        Invalid email address.
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="background-color: #252627; color: white;border: none;">Next</button>
+                            </form>
+                        </div>
+
+                        <!-- Step 2: Card Information -->
+                        <div *ngIf="currentStep === 2">
+                            <form [formGroup]="step2Form" (submit)="goToStep(3)">
+                                <div class="mb-3">
+                                    <label for="cardNumber" class="form-label">Card Number</label>
+                                    <input type="text" class="form-control" id="cardNumber" formControlName="cardNumber"
+                                        required>
+                                    <div *ngIf="step2Form.controls['cardNumber'].invalid && (step2Form.controls['cardNumber'].dirty || step2Form.controls['cardNumber'].touched)"
+                                        class="text-danger">
+                                        Invalid card number. Please enter a valid 16-digit card number.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmCardNumber" class="form-label">Confirm Card Number</label>
+                                    <input type="text" class="form-control" id="confirmCardNumber"
+                                        formControlName="confirmCardNumber" required>
+                                    <div *ngIf="step2Form.controls['confirmCardNumber'].invalid && (step2Form.controls['confirmCardNumber'].dirty || step2Form.controls['confirmCardNumber'].touched)"
+                                        class="text-danger">
+                                        Card numbers do not match.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="expiryDate" class="form-label">Expiry Date (MM/YY)</label>
+                                    <input type="text" class="form-control" id="expiryDate" formControlName="expiryDate"
+                                        required>
+                                    <div *ngIf="step2Form.controls['expiryDate'].invalid && (step2Form.controls['expiryDate'].dirty || step2Form.controls['expiryDate'].touched)"
+                                        class="text-danger">
+                                        Invalid expiry date. Please enter a valid date in the format MM/YY.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cvv" class="form-label">CVV</label>
+                                    <input type="text" class="form-control" id="cvv" formControlName="cvv" required>
+                                    <div *ngIf="step2Form.controls['cvv'].invalid && (step2Form.controls['cvv'].dirty || step2Form.controls['cvv'].touched)"
+                                        class="text-danger">
+                                        Invalid CVV. Please enter a valid 3-digit CVV number.
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary me-2"
+                                    (click)="goToStep(1)">Previous</button>
+                                <button type="submit" class="btn btn-primary" style="background-color: #252627; color: white;border: none;">Next</button>
+                            </form>
+                        </div>
+
+                        <!-- Step 3: Confirm Payment -->
+                        <div *ngIf="currentStep === 3">
+                            <h3>Confirm Payment</h3>
+                            <p><strong>Total Price:</strong> {{ propertyData.total_price }}</p>
+                            <p><strong>Card Number:</strong> {{ step2Form.get('cardNumber')?.value }}</p>
+                            <p><strong>Expiry Date:</strong> {{ step2Form.get('expiryDate')?.value }}</p>
+                            <p><strong>CVV:</strong> {{ step2Form.get('cvv')?.value }}</p>
+                            <button type="button" class="btn btn-secondary me-2" (click)="goToStep(2)">Previous</button>
+                            <button type="submit" class="btn btn-primary" (click)="makePayment()" style="background-color: #252627; color: white;border: none;">Make
+                                Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,86 @@
+/* property-page.component.css */
+
+/* General styles */
+.property-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filter-dropdowns select {
+  margin-right: 10px;
+}
+
+.sorting {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sorting span {
+  margin-right: 10px;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.property-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+}
+
+.property-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.property-details {
+  padding: 20px;
+}
+
+.property-details h2 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.property-details p {
+  margin: 5px 0;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+}
+
+/* Optional: Add background and text color to enhance the design */
+body {
+  background-color: #f7f7f7;
+  color: #333;
+}
