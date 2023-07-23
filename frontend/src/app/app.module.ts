@@ -18,6 +18,7 @@ import { PropertyDetailComponent } from './property-detail/property-detail.compo
 import { PropertyEditComponent } from './property-edit/property-edit.component';
 import { AuthGuard } from './auth.guard';
 import { PreviewComponent } from './preview/preview.component';
+import { PaymentComponent } from './payment/payment.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { PreviewComponent } from './preview/preview.component';
     PropertyDetailComponent,
     PropertyEditComponent,
     PreviewComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

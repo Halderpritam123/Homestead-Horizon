@@ -61,30 +61,32 @@ export class PreviewComponent {
     }
 console.log(this.property.img)
     // Prepare the data for the POST request
-    const bookingData = {
+    const paymentData = {
       property_id: this.property.id,
       property_title: this.property.title,
       price_per_night: this.property.price_per_night,
       property_location: this.property.location,
       property_img:this.property.img,
       book_date: this.bookDate,
-      end_date: this.endDate
+      end_date: this.endDate,
+      total_price: this.totalRent
     };
-
+    // Navigate to the PaymentComponent with the property data as query parameters
+    this.router.navigate(['/payment'], { queryParams: paymentData });
     // Make the POST request to book the property
-    this.http.post<any>('http://localhost:5000/api/properties/book', bookingData)
-      .subscribe(
-        (response) => {
-          // Handle the response after successful booking
-          console.log(response);
-          // You can perform any other actions here, e.g., show a success message, navigate to a new page, etc.
-        },
-        (error) => {
-          // Handle errors if any
-          console.error(error);
-          this.bookingError = 'Error occurred during booking. Please try again.';
-          // You can show an error message to the user or handle the error as per your requirement
-        }
-      );
+    // this.http.post<any>('http://localhost:5000/api/properties/book', bookingData)
+    //   .subscribe(
+    //     (response) => {
+    //       // Handle the response after successful booking
+    //       console.log(response);
+    //       // You can perform any other actions here, e.g., show a success message, navigate to a new page, etc.
+    //     },
+    //     (error) => {
+    //       // Handle errors if any
+    //       console.error(error);
+    //       this.bookingError = 'Error occurred during booking. Please try again.';
+    //       // You can show an error message to the user or handle the error as per your requirement
+    //     }
+    //   );
   }
 }

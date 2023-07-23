@@ -1,0 +1,39 @@
+<!-- payment.component.html -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="payment-details-card">
+          <h2>Payment Details</h2>
+          <p><strong>Property Title:</strong> {{ propertyData.property_title }}</p>
+          <p><strong>Location:</strong> {{ propertyData.property_location }}</p>
+          <p><strong>Price per Night:</strong> {{ propertyData.price_per_night }}</p>
+          <p><strong>Book Date:</strong> {{ propertyData.book_date }}</p>
+          <p><strong>End Date:</strong> {{ propertyData.end_date }}</p>
+          <p><strong>Total Price:</strong> {{ propertyData.total_price }}</p>
+  
+          <!-- Payment form -->
+          <form (submit)="makePayment()" class="mt-3">
+            <div class="mb-3">
+              <label for="cardNumber" class="form-label">Card Number</label>
+              <input type="text" class="form-control" id="cardNumber" [(ngModel)]="cardNumber" name="cardNumber" required>
+            </div>
+            <div class="mb-3">
+              <label for="cardName" class="form-label">Cardholder Name</label>
+              <input type="text" class="form-control" id="cardName" [(ngModel)]="cardName" name="cardName" required>
+            </div>
+            <div class="mb-3">
+              <label for="expiryDate" class="form-label">Expiry Date</label>
+              <input type="text" class="form-control" id="expiryDate" [(ngModel)]="expiryDate" name="expiryDate" required>
+            </div>
+            <div class="mb-3">
+              <label for="cvv" class="form-label">CVV</label>
+              <input type="text" class="form-control" id="cvv" [(ngModel)]="cvv" name="cvv" required>
+            </div>
+  
+            <button type="submit" class="btn btn-primary">Pay Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
