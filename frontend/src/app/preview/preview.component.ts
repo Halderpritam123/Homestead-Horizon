@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 @Component({
   selector: 'app-preview',
@@ -54,39 +55,45 @@ export class PreviewComponent {
     this.totalRent = this.totalDays * this.property.price_per_night;
   }
 
+  // Function to show SweetAlert success notification
+  showSuccessAlert(message: string): void {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: message,
+    });
+  }
+
+  // Function to show SweetAlert error notification
+  showErrorAlert(message: string): void {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+    });
+  }
+
   bookProperty(): void {
     if (this.property.status === false) {
       this.bookingError = 'Property not available for booking.';
+      this.showErrorAlert(this.bookingError);
       return;
     }
-console.log(this.property.img)
+
     // Prepare the data for the POST request
     const paymentData = {
       property_id: this.property.id,
       property_title: this.property.title,
       price_per_night: this.property.price_per_night,
       property_location: this.property.location,
-      property_img:this.property.img,
+      property_img: this.property.img,
       book_date: this.bookDate,
       end_date: this.endDate,
       total_price: this.totalRent
     };
+
     // Navigate to the PaymentComponent with the property data as query parameters
     this.router.navigate(['/payment'], { queryParams: paymentData });
-    // Make the POST request to book the property
-    // this.http.post<any>('http://localhost:5000/api/properties/book', bookingData)
-    //   .subscribe(
-    //     (response) => {
-    //       // Handle the response after successful booking
-    //       console.log(response);
-    //       // You can perform any other actions here, e.g., show a success message, navigate to a new page, etc.
-    //     },
-    //     (error) => {
-    //       // Handle errors if any
-    //       console.error(error);
-    //       this.bookingError = 'Error occurred during booking. Please try again.';
-    //       // You can show an error message to the user or handle the error as per your requirement
-    //     }
-    //   );
+    // this.showSuccessAlert('Property booked successfully!');
   }
 }

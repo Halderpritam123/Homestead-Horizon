@@ -46,8 +46,8 @@
   </div>
 
   <div class="pagination">
-    <button (click)="prevPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+    <button (click)="prevPage()" [disabled]="currentPage === 1" style="background-color: #252627; color: white;border: none;" class="btn btn-primary">Previous</button>
     <span>{{ currentPage }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === 5" class="btn btn-primary">Next</button>
+    <button (click)="nextPage()" [disabled]="currentPage === 5" style="background-color: #252627; color: white;border: none;" class="btn btn-primary">Next</button>
   </div>
 </div>

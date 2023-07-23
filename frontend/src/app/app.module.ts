@@ -9,7 +9,7 @@ import { BookingComponent } from './components/booking/booking.component';
 import { HostComponent } from './components/host/host.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GuestComponent } from './components/guest/guest.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PropertyAdminComponent } from './components/property-admin/property-admin.component';
@@ -42,7 +42,8 @@ import { PaymentComponent } from './payment/payment.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthGuard

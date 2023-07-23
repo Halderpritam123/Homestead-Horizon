@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 @Component({
   selector: 'app-property-edit',
@@ -38,19 +39,39 @@ export class PropertyEditComponent implements OnInit {
   }
 
   updateProperty(): void {
-    console.log(this.property)
+    console.log(this.property);
     this.http.put<any>('http://localhost:5000/api/properties/' + this.property.id, this.property)
       .subscribe(
         () => {
+          this.showSuccessAlert('Property updated successfully!');
           this.router.navigate(['/property', this.property.id]);
         },
         (error) => {
           console.error(error);
+          this.showErrorAlert('Error occurred while updating the property. Please try again.');
         }
       );
   }
 
   goBack(): void {
     this.router.navigate(['/property', this.property.id]);
+  }
+
+  // Function to show SweetAlert success notification
+  showSuccessAlert(message: string): void {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: message,
+    });
+  }
+
+  // Function to show SweetAlert error notification
+  showErrorAlert(message: string): void {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+    });
   }
 }

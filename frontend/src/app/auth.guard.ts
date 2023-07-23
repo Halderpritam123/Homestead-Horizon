@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,14 @@ export class AuthGuard implements CanActivate {
     if (!userRole) {
       // If not logged in, redirect to the home page or login page
       this.router.navigate(['/home']); // Replace '/home' with the appropriate home page URL
-      alert('Please log in to access this page.');
+      this.showErrorAlert('Please log in to access this page.');
       return false;
     }
 
     const isGuest = userRole === 'guest';
     const isHost = userRole === 'host';
 
-    if (state.url.includes('/booking') || state.url.includes('/preview/') && isGuest) {
+    if (state.url.includes('/booking') || (state.url.includes('/preview/') && isGuest)) {
       // Allow access to the booking route for guests
       return true;
     } else if (
@@ -33,8 +34,17 @@ export class AuthGuard implements CanActivate {
     } else {
       // If the user has an unknown role or is not authorized for the current route, redirect to the home page or display an alert
       this.router.navigate(['/home']); // Replace '/home' with the appropriate home page URL
-      alert('You are not authorized to access this page.');
+      this.showErrorAlert('You are not authorized to access this page.');
       return false;
     }
+  }
+
+  // Function to show SweetAlert error notification
+  showErrorAlert(message: string): void {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+    });
   }
 }

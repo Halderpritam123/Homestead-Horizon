@@ -73,4 +73,93 @@
     object-fit: cover;
     border-radius: 5px;
   }
+  .filter-sort-pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .filter-sort-pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  /* Style for pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    /* ... (existing pagination styles) ... */
+  }
   
+  /* Updated styles for the buttons */
+  .pagination button {
+    background-color: #252627;
+    color: white;
+    border: none;
+    font-size: 14px; /* Adjust the font size as needed */
+    padding: 6px 10px; /* Adjust the padding as needed */
+    margin: 0 2px; /* Adjust the margin as needed */
+  }
+  
+  /* Apply a larger font size to the current page indicator */
+  .pagination span {
+    font-size: 16px; /* Adjust the font size as needed */
+  }
+  /* Custom styles for property-admin.component.html */
+
+/* Container for filters, sorting, and pagination */
+.filter-sort-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Add alignment for vertical centering */
+  margin-bottom: 20px;
+}
+
+/* Style for filters */
+.filters {
+  /* ... (existing filter styles) ... */
+}
+
+/* Style for sorting */
+.sorting {
+  display: flex; /* Align the radio buttons in a row */
+  align-items: center; /* Align radio buttons vertically */
+  gap: 10px; /* Add spacing between elements */
+}
+
+/* Updated styles for the radio buttons */
+.sorting label {
+  display: flex; /* Align the label and input in a row */
+  align-items: center; /* Align vertically center */
+  gap: 5px; /* Add spacing between label and input */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.sorting input[type="radio"] {
+  appearance: none; /* Hide default radio button appearance */
+  width: 16px; /* Set the width of the custom radio button */
+  height: 16px; /* Set the height of the custom radio button */
+  border-radius: 50%; /* Create a circular radio button */
+  border: 2px solid #ccc; /* Add border to the radio button */
+  outline: none; /* Remove outline on focus */
+  margin: 0; /* Remove default margin */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Style the custom radio button when checked */
+.sorting input[type="radio"]:checked {
+  background-color: #252627; /* Change background color when checked */
+  border-color: #252627; /* Change border color when checked */
+}
+
+/* Apply custom styles to the radio button label when checked */
+.sorting input[type="radio"]:checked + span {
+  color: #252627; /* Change text color when checked */
+  font-weight: bold; /* Add bold font weight when checked */
+}
+
+/* Apply a larger font size to the "Sort by" text */
+.sorting span {
+  font-size: 14px; /* Adjust the font size as needed */
+}

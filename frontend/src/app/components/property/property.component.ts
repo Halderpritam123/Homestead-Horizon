@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 @Component({
   selector: 'app-property',
@@ -12,7 +13,7 @@ export class PropertyComponent implements OnInit {
   properties: any[] = [];
   currentPage: number = 1;
   totalPages: number = 1;
-  perPage: number = 10;
+  perPage: number = 9;
   titleFilter: string = '';
   propertyTypeFilter: string = '';
   locationFilter: string = '';
@@ -79,5 +80,23 @@ export class PropertyComponent implements OnInit {
 
   toggleSortDirection(): void {
     this.getProperties(); // Fetch properties again with the updated sorting parameters
+  }
+
+  // Function to show SweetAlert success notification
+  showSuccessAlert(message: string): void {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: message,
+    });
+  }
+
+  // Function to show SweetAlert error notification
+  showErrorAlert(message: string): void {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: message,
+    });
   }
 }

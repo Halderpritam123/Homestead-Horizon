@@ -174,7 +174,7 @@ def get_all_properties():
     sort_by = request.args.get('sort_by', 'price_per_night')  # Default sort by price_per_night
     sort_order = int(request.args.get('sort_order', 1))  # Default sort order ascending
     page = int(request.args.get('page', 1))  # Default page 1
-    per_page = int(request.args.get('per_page', 10))  # Default 10 properties per page
+    per_page = int(request.args.get('per_page', 9))  # Default 10 properties per page
     title_filter = request.args.get('title', '')
     property_type_filter = request.args.get('property_type', '')
     location_filter = request.args.get('location', '')

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 @Component({
   selector: 'app-host',
@@ -25,13 +26,23 @@ export class HostComponent implements OnInit {
         localStorage.setItem('userRole', 'host'); // Set userRole to 'host'
         localStorage.setItem('host_id', response.host_id);
         this.errorMessage = '';
-        alert('Login successful!');
+        // Show SweetAlert success notification
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Login successful!',
+        });
         this.router.navigate(['/property-admin']); // Redirect to the property admin page
       },
       (error) => {
         console.error(error);
         this.errorMessage = error.error.error || 'An error occurred during login.';
-        alert('Login failed. Please check your credentials and try again.');
+        // Show SweetAlert error notification
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Login failed. Please check your credentials and try again.',
+        });
       }
     );
   }
@@ -42,12 +53,22 @@ export class HostComponent implements OnInit {
       (response: any) => {
         console.log(response);
         this.errorMessage = '';
-        alert('Signup successful!');
+        // Show SweetAlert success notification
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Signup successful!',
+        });
       },
       (error) => {
         console.error(error);
         this.errorMessage = error.error.error || 'An error occurred during signup.';
-        alert('Signup failed. Please try again later.');
+        // Show SweetAlert error notification
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Signup failed. Please try again later.',
+        });
       }
     );
   }
