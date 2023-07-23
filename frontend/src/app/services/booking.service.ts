@@ -29,4 +29,5 @@ export class BookingService {
   deleteBooking(bookingId: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${bookingId}`);
   }
+  
 }

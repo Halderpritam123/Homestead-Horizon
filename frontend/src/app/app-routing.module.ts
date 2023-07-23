@@ -10,11 +10,13 @@ import { PropertyAdminComponent } from './components/property-admin/property-adm
 // import { SinglePropertyComponent } from './single-property/single-property.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
 import { PropertyEditComponent } from './property-edit/property-edit.component';
+import { PreviewComponent } from './preview/preview.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'property', component: PropertyComponent },
   { path: 'booking', component: BookingComponent, canActivate: [AuthGuard] }, // Protected for guest only
+  { path: 'preview/:id', component: PreviewComponent, canActivate: [AuthGuard] }, // Protected for guest only
   { path: 'host', component: HostComponent },
   { path: 'guest', component: GuestComponent },
   { path: 'property-admin', component: PropertyAdminComponent, canActivate: [AuthGuard] }, // Protected for host only

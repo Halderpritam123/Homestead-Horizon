@@ -3,12 +3,11 @@
   
     <div class="property-grid">
       <div class="property-card" *ngFor="let property of bookedProperties">
-        <img [src]="property.img" alt="Property Image" class="property-image">
+        <img [src]="property.property_img.slice(2,-2)" alt="Property Image" class="property-image">
         <div class="property-details">
-          <h2>{{ property.title }}</h2>
-          <p>{{ property.location }}</p>
+          <h2>{{ property.property_title }}</h2>
+          <p>{{ property.property_location }}</p>
           <p>{{ property.property_type }}</p>
-          <p>{{ property.description }}</p>
           <p>Price per Night: {{ property.price_per_night }}</p>
           <button class="delete-button" (click)="deleteProperty(property.booking_id)">Cancel Booking</button>
         </div>

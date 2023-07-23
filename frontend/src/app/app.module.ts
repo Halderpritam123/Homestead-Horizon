@@ -17,6 +17,7 @@ import { PropertyAdminComponent } from './components/property-admin/property-adm
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
 import { PropertyEditComponent } from './property-edit/property-edit.component';
 import { AuthGuard } from './auth.guard';
+import { PreviewComponent } from './preview/preview.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AuthGuard } from './auth.guard';
     // SinglePropertyComponent,
     PropertyDetailComponent,
     PropertyEditComponent,
+    PreviewComponent,
   ],
   imports: [
     BrowserModule,

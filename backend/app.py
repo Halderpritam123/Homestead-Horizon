@@ -1,12 +1,14 @@
+# Import necessary modules and libraries
 from flask import Flask, request, jsonify, session
 from pymongo import MongoClient
-from flask_cors import CORS 
+from flask_cors import CORS
 from bson.objectid import ObjectId
 import bcrypt
 
+# Create the Flask app instance
 app = Flask(__name__)
-CORS(app) 
-app.secret_key = "pritam"
+CORS(app)  # Enable Cross-Origin Resource Sharing (CORS) to allow requests from different domains
+app.secret_key = "pritam"  # Secret key for session encryption
 app.config['SESSION_TYPE'] = 'filesystem'  # Enable Flask session type
 
 # MongoDB configuration
@@ -16,26 +18,23 @@ DB_NAME = "horizonHotel"  # Replace this with your desired database name
 # Helper functions
 
 def get_db():
+    # Connect to the MongoDB server and return the database instance
     client = MongoClient(MONGO_URI)
     return client[DB_NAME]
 
 def hash_password(password):
+    # Hash the provided password using bcrypt
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 def verify_password(stored_hash, password):
+    # Verify if the provided password matches the stored hashed password
     return bcrypt.checkpw(password.encode('utf-8'), stored_hash)
-
-def is_host_authenticated():
-    return session.get('user_role') == 'host'
-
-def is_guest_authenticated():
-    return session.get('user_role') == 'guest'
 
 # Property model class
 class Property:
-    def __init__(self, host_id, title, location, status, property_type, description, price_per_night, img):
+    def __init__(self, title, location, status, property_type, description, price_per_night, img):
+        # Initialize the Property object with the provided attributes
         self._id = ObjectId()
-        self.host_id = host_id
         self.title = title
         self.location = location
         self.property_type = property_type
@@ -46,21 +45,26 @@ class Property:
 
 # Booking model class
 class Booking:
-    def __init__(self, property_id, property_title, price_per_night, property_location, book_date, end_date):
+    def __init__(self,property_img, property_id, property_title, price_per_night, property_location, book_date, end_date):
+        # Initialize the Booking object with the provided attributes
         self._id = ObjectId()
         self.property_id = property_id
         self.property_title = property_title
         self.price_per_night = price_per_night
         self.property_location = property_location
+        self.property_img=property_img,
         self.book_date = book_date
         self.end_date = end_date
 
+# Route to handle the root URL
 @app.route("/")
 def index():
-    return ("server running")
+    # Return a simple message to indicate that the server is running
+    return "Server running"
 
 # User routes
 
+# Route to handle host signup
 @app.route('/signup/host', methods=['POST'])
 def host_signup():
     db = get_db()
@@ -83,6 +87,7 @@ def host_signup():
 
     return jsonify({"host_id": str(host_id)}), 201
 
+# Route to handle guest signup
 @app.route('/signup/guest', methods=['POST'])
 def guest_signup():
     db = get_db()
@@ -105,6 +110,7 @@ def guest_signup():
 
     return jsonify({"guest_id": str(guest_id)}), 201
 
+# Route to handle host login
 @app.route('/login/host', methods=['POST'])
 def host_login():
     db = get_db()
@@ -128,6 +134,7 @@ def host_login():
     # Return the host ID in the login response
     return jsonify({"message": "Host login successful", "host_id": str(host["_id"])}), 200
 
+# Route to handle guest login
 @app.route('/login/guest', methods=['POST'])
 def guest_login():
     db = get_db()
@@ -150,8 +157,16 @@ def guest_login():
 
     return jsonify({"message": "Guest login successful"}), 200
 
+# Route to handle user logout
+@app.route('/logout', methods=['POST'])
+def logout():
+    # Remove user_role from session to log out the user
+    session.pop('user_role', None)
+    return jsonify({"message": "Logout successful"}), 200
+
 # Property routes
 
+# Route to get all properties
 @app.route("/api/properties", methods=["GET"])
 def get_all_properties():
     db = get_db()
@@ -190,6 +205,10 @@ def get_all_properties():
     skip = (page - 1) * per_page
     limit = per_page
 
+    # Ensure that the skip value is non-negative
+    if skip < 0:
+        skip = 0
+
     # Fetch properties based on the filter and pagination parameters
     properties = db.properties.find(filter_query).sort(sort_by, sort_order).skip(skip).limit(limit)
 
@@ -199,7 +218,6 @@ def get_all_properties():
         res.append({
             "id": str(property["_id"]),
             "title": str(property['title']),
-            "host_id": str(property['host_id']),
             "location": str(property['location']),
             "property_type": str(property['property_type']),
             "description": str(property['description']),
@@ -210,8 +228,7 @@ def get_all_properties():
 
     # Return the paginated and filtered properties
     return jsonify(res)
-
-
+# Route to get a single property by property ID
 @app.route("/api/properties/<string:property_id>", methods=["GET"])
 def get_property(property_id):
     db = get_db()
@@ -220,7 +237,6 @@ def get_property(property_id):
         res = {
             "id": str(property["_id"]),
             "title": str(property["title"]),
-            "host_id": str(property["host_id"]),
             "location": str(property["location"]),
             "property_type": str(property["property_type"]),
             "description": str(property["description"]),
@@ -231,15 +247,12 @@ def get_property(property_id):
         return jsonify(res)
     return jsonify({"message": "Property not found"}), 404
 
+# Route to create a new property
 @app.route("/api/properties", methods=["POST"])
 def create_property():
-    if not is_host_authenticated():
-        return jsonify({"error": "Unauthorized"}), 401
-
     db = get_db()
     data = request.get_json()
     property = Property(
-        host_id=data["host_id"],
         title=data["title"],
         location=data["location"],
         property_type=data["property_type"],
@@ -251,22 +264,17 @@ def create_property():
     db.properties.insert_one(property.__dict__)
     return jsonify({"message": "Property created successfully"}), 201
 
-
+# Route to update an existing property by property ID
 @app.route("/api/properties/<string:property_id>", methods=["PUT"])
 def update_property(property_id):
-    if not is_host_authenticated():
-        return jsonify({"error": "Unauthorized"}), 401
-
     db = get_db()
     data = request.get_json()
     db.properties.update_one({"_id": ObjectId(property_id)}, {"$set": data})
     return jsonify({"message": "Property updated successfully"})
 
+# Route to delete an existing property by property ID
 @app.route("/api/properties/<string:property_id>", methods=["DELETE"])
 def delete_property(property_id):
-    if not is_host_authenticated():
-        return jsonify({"error": "Unauthorized"}), 401
-
     db = get_db()
     result = db.properties.delete_one({"_id": ObjectId(property_id)})
     if result.deleted_count > 0:
@@ -274,20 +282,18 @@ def delete_property(property_id):
     return jsonify({"message": "Property not found"}), 404
 
 # Route to post a new booking
+# Route to post a new booking
 @app.route("/api/properties/book", methods=["POST"])
 def post_property_to_book_collection():
-    # Check if the user is authenticated as a guest
-    if not is_guest_authenticated():
-        return jsonify({"error": "Unauthorized"}), 401
-
     db = get_db()
     data = request.get_json()
-    
+
     # Extract booking data from the request body
     property_id = data.get('property_id')
     property_title = data.get('property_title')
     price_per_night = data.get('price_per_night')
     property_location = data.get('property_location')
+    property_img = data.get('property_img')  # Directly set the property_img attribute to the received string value
     book_date = data.get('book_date')
     end_date = data.get('end_date')
 
@@ -297,6 +303,7 @@ def post_property_to_book_collection():
         property_title=property_title,
         price_per_night=price_per_night,
         property_location=property_location,
+        property_img=property_img,  # Set property_img as string without any changes
         book_date=book_date,
         end_date=end_date
     )
@@ -309,6 +316,7 @@ def post_property_to_book_collection():
         db.properties.update_one({"_id": ObjectId(property_id)}, {"$set": {"status": False}})
 
     return jsonify({"booking_id": str(booking_id)}), 201
+
 
 # Route to get all booking data
 @app.route("/api/properties/book", methods=["GET"])
@@ -323,6 +331,7 @@ def get_all_book_data():
             "property_title": str(book_entry.get("property_title")),
             "price_per_night": str(book_entry.get("price_per_night")),
             "property_location": str(book_entry.get("property_location")),
+            "property_img":str(book_entry.get("property_img")),
             "book_date": str(book_entry.get("book_date")),
             "end_date": str(book_entry.get("end_date"))
         })
@@ -340,32 +349,38 @@ def get_book_data(booking_id):
             "property_title": str(book_entry.get("property_title")),
             "price_per_night": str(book_entry.get("price_per_night")),
             "property_location": str(book_entry.get("property_location")),
+            "property_img":str(book_entry.get("property_img")),
             "book_date": str(book_entry.get("book_date")),
             "end_date": str(book_entry.get("end_date"))
         }
         return jsonify(res)
     return jsonify({"message": "Booking data not found"}), 404
-
 # Route to delete a booking data by booking ID
 @app.route("/api/properties/book/<string:booking_id>", methods=["DELETE"])
 def delete_book_data(booking_id):
-    # Check if the user is authenticated as a guest
-    if not is_guest_authenticated():
-        return jsonify({"error": "Unauthorized"}), 401
-
     db = get_db()
-    result = db.book.delete_one({"_id": ObjectId(booking_id)})
-    if result.deleted_count > 0:
-        return jsonify({"message": "Booking data deleted successfully"})
+    book_entry = db.book.find_one({"_id": ObjectId(booking_id)})
+    if book_entry:
+        property_id = book_entry.get("property_id")
+
+        # Delete the booking data
+        result = db.book.delete_one({"_id": ObjectId(booking_id)})
+        if result.deleted_count > 0:
+            # Update the status of the property to True (available) after deleting the booking
+            if property_id:
+                db.properties.update_one({"_id": ObjectId(property_id)}, {"$set": {"status": True}})
+            return jsonify({"message": "Booking data deleted successfully"})
     return jsonify({"message": "Booking data not found"}), 404
 
+# # Route to delete a booking data by booking ID
+# @app.route("/api/properties/book/<string:booking_id>", methods=["DELETE"])
+# def delete_book_data(booking_id):
+#     db = get_db()
+#     result = db.book.delete_one({"_id": ObjectId(booking_id)})
+#     if result.deleted_count > 0:
+#         return jsonify({"message": "Booking data deleted successfully"})
+#     return jsonify({"message": "Booking data not found"}), 404
 
-
-@app.route('/logout', methods=['POST'])
-def logout():
-    session.pop('user_role', None)
-    return jsonify({"message": "Logout successful"}), 200
-
-
+# Run the Flask app if this script is executed as the main program
 if __name__ == '__main__':
     app.run(debug=True)

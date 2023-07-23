@@ -19,13 +19,17 @@ export class BookingComponent {
     // Fetch the booked properties from the backend
     this.bookingService.getBookedProperties().subscribe(
       (response: any) => {
-        console.log('Booked properties:', response);
+        console.log('Booked properties:', response[0].property_img.slice(2,-2));
         this.bookedProperties = response;
       },
       (error: any) => {
         console.error('Error fetching booked properties:', error);
       }
     );
+    this.bookedProperties = this.bookedProperties.map(property => {
+      property.property_img = property.property_img[0].replace(/[\[\]']+/g, '');
+      return property;
+    });
   }
 
   deleteProperty(bookingId: string): void {
@@ -40,4 +44,6 @@ export class BookingComponent {
       }
     );
   }
+  
 }
+

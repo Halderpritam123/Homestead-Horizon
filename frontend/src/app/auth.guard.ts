@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     const isGuest = userRole === 'guest';
     const isHost = userRole === 'host';
 
-    if (state.url.includes('/booking') && isGuest) {
+    if (state.url.includes('/booking') || state.url.includes('/preview/') && isGuest) {
       // Allow access to the booking route for guests
       return true;
     } else if (
