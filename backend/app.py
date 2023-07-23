@@ -165,7 +165,6 @@ def logout():
     return jsonify({"message": "Logout successful"}), 200
 
 # Property routes
-
 # Route to get all properties
 @app.route("/api/properties", methods=["GET"])
 def get_all_properties():
@@ -210,7 +209,11 @@ def get_all_properties():
         skip = 0
 
     # Fetch properties based on the filter and pagination parameters
-    properties = db.properties.find(filter_query).sort(sort_by, sort_order).skip(skip).limit(limit)
+    properties = db.properties.find(filter_query).skip(skip).limit(limit)
+
+    # Sort the properties based on the provided sort parameters
+    if sort_by:
+        properties = properties.sort(sort_by, sort_order)
 
     # Convert the properties to a list of dictionaries
     res = []
@@ -228,6 +231,8 @@ def get_all_properties():
 
     # Return the paginated and filtered properties
     return jsonify(res)
+
+
 # Route to get a single property by property ID
 @app.route("/api/properties/<string:property_id>", methods=["GET"])
 def get_property(property_id):

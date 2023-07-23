@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class PropertyService {
   private baseUrl = 'http://127.0.0.1:5000/api/properties'; // Update this URL if your backend URL is different
+  sortBy: string = 'price_per_night'; // Default sort field
+  sortOrder: number = 1; // 1 for ascending, -1 for descending
 
   constructor(private http: HttpClient) { }
 
@@ -15,11 +17,15 @@ export class PropertyService {
     perPage: number,
     titleFilter: string,
     propertyTypeFilter: string,
-    locationFilter: string
+    locationFilter: string,
+    sortBy?: string,
+    sortOrder?: number
   ): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
-      .set('per_page', perPage.toString());
+      .set('per_page', perPage.toString())
+      .set('sort_by', sortBy || this.sortBy) // Use the provided sortBy or the default one
+      .set('sort_order', sortOrder?.toString() || this.sortOrder.toString()); // Use the provided sortOrder or the default one
 
     if (titleFilter) {
       params = params.set('title', titleFilter);
@@ -35,5 +41,4 @@ export class PropertyService {
 
     return this.http.get<any>(this.baseUrl, { params });
   }
-
 }

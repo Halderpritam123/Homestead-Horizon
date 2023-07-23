@@ -1,18 +1,19 @@
+<!-- login.component.html -->
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <div class="card login-card">
-        <div class="card-header bg-primary text-white">
-          <h2 class="text-center">Guest Login</h2>
+      <div class="card login-card custom-card">
+        <div class="card-header text-center" style="background-color: #252627; color: white; border-radius: 7px;">
+          <h2>Guest Login</h2>
         </div>
         <div class="card-body">
           <form (submit)="signup($event)">
-            <div class="form-group">
-              <label for="email">Email:</label>
+            <div class="mb-3">
+              <label class="form-label" for="email">Email:</label>
               <input type="text" id="email" name="email" class="form-control" [(ngModel)]="email">
             </div>
-            <div class="form-group">
-              <label for="password">Password:</label>
+            <div class="mb-3">
+              <label class="form-label" for="password">Password:</label>
               <input type="password" id="password" name="password" class="form-control" [(ngModel)]="password">
             </div>
             <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
@@ -21,6 +22,9 @@
               <button class="btn btn-secondary btn-signup" type="submit">Sign Up</button>
             </div>
           </form>
+        </div>
+        <div class="card-footer text-muted text-center" style="background-color: #252627; border-radius: 0 0 7px 7px; color: white;">
+          &copy; kxj
         </div>
       </div>
     </div>

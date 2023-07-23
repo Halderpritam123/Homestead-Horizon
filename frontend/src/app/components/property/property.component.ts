@@ -16,6 +16,8 @@ export class PropertyComponent implements OnInit {
   titleFilter: string = '';
   propertyTypeFilter: string = '';
   locationFilter: string = '';
+  sortField: string = 'price_per_night'; // Default sort field
+  sortOrder: number = 1; // Default sort order (ascending)
 
   constructor(
     private propertyService: PropertyService,
@@ -28,23 +30,25 @@ export class PropertyComponent implements OnInit {
   }
 
   getProperties(): void {
-    this.propertyService.getAllProperties(
-      this.currentPage,
-      this.perPage,
-      this.titleFilter,
-      this.propertyTypeFilter,
-      this.locationFilter
-    ).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.properties = response;
-        this.totalPages = response.length;
-        console.log(this.totalPages)
-      },
-      (error: any) => {
-        console.error('Error fetching properties:', error);
-      }
-    );
+    this.propertyService
+      .getAllProperties(
+        this.currentPage,
+        this.perPage,
+        this.titleFilter,
+        this.propertyTypeFilter,
+        this.locationFilter,
+        this.sortField,
+        this.sortOrder // Pass sorting parameters separately
+      )
+      .subscribe(
+        (response: any) => {
+          this.properties = response;
+          this.totalPages = response.totalPages;
+        },
+        (error: any) => {
+          console.error('Error fetching properties:', error);
+        }
+      );
   }
 
   applyFilters(): void {
@@ -53,33 +57,27 @@ export class PropertyComponent implements OnInit {
   }
 
   nextPage(): void {
-    if (this.currentPage < this.totalPages) {
+    console.log("Ok")
+    // if (this.currentPage < this.totalPages) {
       this.currentPage++;
+      console.log(this.currentPage)
       this.getProperties();
-    }
+    // }
   }
 
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
+      console.log(this.currentPage)
       this.getProperties();
     }
   }
+
   viewPreview(propertyId: string): void {
     this.router.navigate(['/preview', propertyId]);
   }
-  // bookProperty(property: any): void {
-  //   this.http.post<any>('http://127.0.0.1:5000/api/properties/book', property).subscribe(
-  //     (response: any) => {
-  //       console.log('Booking successful:', response);
-  //       alert('Booking Successful!');
-  //       // Navigate to the booking page on successful booking
-  //       this.router.navigate(['/bookings']); // Change '/bookings' to the actual route for the booking page
-  //     },
-  //     (error: any) => {
-  //       console.error('Error booking property:', error);
-  //       alert('Booking Failed! Please try again later.');
-  //     }
-  //   );
-  // }
+
+  toggleSortDirection(): void {
+    this.getProperties(); // Fetch properties again with the updated sorting parameters
+  }
 }

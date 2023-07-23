@@ -38,6 +38,7 @@ export class PropertyEditComponent implements OnInit {
   }
 
   updateProperty(): void {
+    console.log(this.property)
     this.http.put<any>('http://localhost:5000/api/properties/' + this.property.id, this.property)
       .subscribe(
         () => {

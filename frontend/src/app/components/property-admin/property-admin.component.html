@@ -1,7 +1,8 @@
+<!-- property-admin.component.html -->
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <form (submit)="postProperty()" class="mb-3">
+      <form (submit)="postProperty()" class="mb-3 property-form">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input type="text" class="form-control" id="title" [(ngModel)]="propertyData.title" name="title" required>
@@ -36,35 +37,36 @@
           <label class="form-check-label" for="status">Status</label>
         </div>
 
-        <button type="submit" class="btn btn-primary">Post Property</button>
+        <button type="submit" class="btn btn-primary" style="background-color: #252627; color: white;border: none;">Post Property</button>
       </form>
     </div>
   </div>
 
   <div class="row justify-content-center">
     <div class="col-md-12">
-      <table class="table table-bordered">
+      <table class="table table-bordered property-table">
         <thead>
           <tr>
+            <th>Image</th>
             <th>Title</th>
             <th>Location</th>
             <th>Property Type</th>
             <!-- <th>Description</th> -->
             <th>Price per Night</th>
-            <!-- <th>Image URL</th> -->
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let property of properties">
+            <td> <img [src]="property.img" alt="Property Image" class="property-image"></td>
             <td>{{ property.title }}</td>
             <td>{{ property.location }}</td>
             <td>{{ property.property_type }}</td>
             <!-- <td>{{ property.description }}</td> -->
-            <td>{{ property.price_per_night }}</td>
+            <td>₹{{ property.price_per_night }}</td>
             <!-- <td>{{ property.img }}</td> -->
             <td>
-              <button class="btn btn-primary" (click)="viewProperty(property.id)">View Property</button>
+              <button class="btn btn-primary" (click)="viewProperty(property.id)" style="background-color: #252627; color: white;border: none;">View Property</button>
             </td>
           </tr>
         </tbody>

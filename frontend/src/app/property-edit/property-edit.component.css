@@ -1,0 +1,72 @@
+/* property-edit.component.css */
+
+/* General styles */
+.container {
+    max-width: 1200px;
+  }
+  
+  .property-form {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .property-form h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  .property-form label {
+    font-weight: bold;
+  }
+  
+  .property-form input[type="text"],
+  .property-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .property-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .property-form input[type="number"],
+  .property-form input[type="checkbox"] {
+    margin-bottom: 15px;
+  }
+  
+  .property-form button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .property-form .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .property-form .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .property-form .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+  }
+  
+  .property-form .btn-secondary:hover {
+    background-color: #444;
+  }
+  
