@@ -3,13 +3,16 @@
 Live Demo:[https://64bdab6e5797ba67f576c003--kaleidoscopic-choux-c57581.netlify.app/home](https://kaleidoscopic-choux-c57581.netlify.app/home)
 <br/>
 Backend Link:https://horizon-2pqa.onrender.com/
+<br/>
+Video Presentation:https://drive.google.com/file/d/1oB_Bx0RL9pizmuggxMy-1CaS0DWKgHv6/view?usp=sharing
 
 **Stage 1: Project Setup and Database Design**
 
 1. Page Name: Database Schema Design
    - Functionality: The four main entities: Hosts, Properties, Guests, and Bookings.
    - Tech Stack: Backend: Flask, Python
-   -              Frontend:
+   -              Frontend: Angular
+   -              Data Base:Mongo Db
 **Stage 2: Backend Development**
 
 2. Page Name: Host Management
