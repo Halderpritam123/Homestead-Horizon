@@ -26,7 +26,7 @@ export class ChatbotComponent {
     }
 
     this.chatMessages.push({ isUser: true, content: userMessage });
-    this.http.post<any>('http://localhost:5000/api/chat', { user_input: userMessage })
+    this.http.post<any>('https://horizon-2pqa.onrender.com/api/chat', { user_input: userMessage })
       .subscribe(response => {
         const chatbotResponse = response.response;
         this.chatMessages.push({ isUser: false, content: chatbotResponse });
