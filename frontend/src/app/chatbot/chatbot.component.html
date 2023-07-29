@@ -1,0 +1,11 @@
+<div class="chat-container" [ngClass]="{'show-chat': showChat}">
+    <div class="chat">
+      <div class="message" *ngFor="let message of chatMessages" [ngClass]="{'user-message': message.isUser, 'chatbot-message': !message.isUser}">
+        <span class="message-content">{{ message.content }}</span>
+      </div>
+    </div>
+    <input [(ngModel)]="userInput" (keyup.enter)="sendMessage()" placeholder="Type your message..." />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+  <button class="chat-button" (click)="toggleChatVisibility()">Chat</button>
+  

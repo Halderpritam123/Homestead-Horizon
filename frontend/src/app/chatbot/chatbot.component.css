@@ -1,0 +1,94 @@
+/* Add floating styles for the chat button */
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4e5052;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Add floating styles for the chat container */
+  .chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    width: 350px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    display: none; /* Hide the chat window by default */
+  }
+  
+  /* Show the chat container when 'showChat' is true */
+  .show-chat {
+    display: block;
+  }
+  
+  /* Style the chat input and button */
+  .chat-container input {
+    display: block;
+    width: 94%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .chat-container button {
+    display: block;
+    width: 50%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style chat messages */
+  .chat {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  
+  .message {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+  }
+  
+  .user-message {
+    background-color: #484d52;
+    color: #fff;
+    align-self: flex-end;
+  }
+  
+  .chatbot-message {
+    background-color: #979292;
+    color: #fff;
+    align-self: flex-start;
+  }
+  
+  .chat {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .message {
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+  
+  input, button {
+    margin-top: 10px;
+  }
+  
+  

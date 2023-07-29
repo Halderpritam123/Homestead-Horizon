@@ -19,6 +19,7 @@ import { PropertyEditComponent } from './property-edit/property-edit.component';
 import { AuthGuard } from './auth.guard';
 import { PreviewComponent } from './preview/preview.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { PaymentComponent } from './payment/payment.component';
     PropertyEditComponent,
     PreviewComponent,
     PaymentComponent,
+    ChatbotComponent,
   ],
   imports: [
     BrowserModule,
