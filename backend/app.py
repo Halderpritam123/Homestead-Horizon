@@ -4,7 +4,8 @@ from pymongo import MongoClient
 from flask_cors import CORS
 from bson.objectid import ObjectId
 import bcrypt
-
+import openai
+import os
 # Create the Flask app instance
 app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin Resource Sharing (CORS) to allow requests from different domains
@@ -385,6 +386,200 @@ def delete_book_data(booking_id):
 #     if result.deleted_count > 0:
 #         return jsonify({"message": "Booking data deleted successfully"})
 #     return jsonify({"message": "Booking data not found"}), 404
+
+# bot 
+api_key=os.environ.get('API_KEY')
+# Set your OpenAI API key
+openai.api_key = api_key
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    user_input = request.json['user_input']
+    response = get_chatbot_response(user_input)
+    return jsonify({'response': response})
+
+def get_chatbot_response(user_input):
+    # Initial greeting
+    if not user_input.strip():
+        return "How can I assist you?"
+
+    # General responses for common greetings
+    greetings = ["hi", "hello", "hey"]
+    if user_input.lower() in greetings:
+        return "Yes, hello! How can I help you?"
+
+    # Handle hotel-related queries
+    if "hotel" in user_input.lower():
+        return get_hotel_response(user_input)
+
+    # Default response using GPT-3 for general questions
+    try:
+        chatbot_response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=f"User: {user_input}\nChatGPT:",
+            temperature=0.7,
+            max_tokens=150
+        )
+        return chatbot_response['choices'][0]['text'].strip()
+    except Exception as e:
+        return "I'm sorry, but I couldn't understand your question. Please try again later."
+
+def get_hotel_response(user_input):
+    # Sample hotel-related responses (you can expand this as needed)
+    if "best hotels" in user_input.lower():
+        return "The best hotels at this time are Serenity Haven House, Cityscape View Apartment, Riverside Paradise House, Urban Oasis Apartment."
+    if "best hotels in kolkata" in user_input.lower():
+        return "The best hotels at this time are Serenity Haven House, Cityscape View Apartment, Riverside Paradise House, Urban Oasis Apartment."
+    if "best hotels in mumbai" in user_input.lower():
+        return "The best hotels at this time are Cityscape Apartment, Cityscape View Apartment, Riverside Paradise House, Cityscape Apartment."
+    if "best hotels in bengaluru" in user_input.lower():
+        return "The best hotels at this time are Cityscape View Apartment, Riverside Paradise House, Urban Oasis Apartment."
+    if "Wi-Fi facility" in user_input.lower():
+        return "Yes, Wi-Fi is available in all rooms."
+
+    if "rarest hotels" in user_input.lower():
+        return "The rarest hotels are located in ABC location."
+    
+    if "best hotel" in user_input.lower():
+        return "The best hotel at this time is XYZ Hotel."
+
+    if "Wi-Fi facility" in user_input.lower():
+        return "Yes, Wi-Fi is available in all rooms."
+
+    if "rarest hotels" in user_input.lower():
+        return "The rarest hotels are located in ABC location."
+
+    if "cancellation policy" in user_input.lower():
+        return "You can cancel your reservation up to 24 hours before the check-in date without any charges."
+
+    if "breakfast included" in user_input.lower():
+        return "Yes, breakfast is included in the room rate."
+
+    if "airport shuttle" in user_input.lower():
+        return "Yes, we offer complimentary airport shuttle service for our guests."
+
+    if "check-in time" in user_input.lower():
+        return "The standard check-in time is 3:00 PM."
+
+    if "check-out time" in user_input.lower():
+        return "The standard check-out time is 12:00 PM."
+
+    if "room service" in user_input.lower():
+        return "Yes, we provide 24/7 room service for our guests."
+    
+    if "best hotel" in user_input.lower():
+        return "The best hotel at this time is XYZ Hotel."
+
+    if "Wi-Fi facility" in user_input.lower():
+        return "Yes, Wi-Fi is available in all rooms."
+
+    if "rarest hotels" in user_input.lower():
+        return "The rarest hotels are located in ABC location."
+
+    if "cancellation policy" in user_input.lower():
+        return "You can cancel your reservation up to 24 hours before the check-in date without any charges."
+
+    if "breakfast included" in user_input.lower():
+        return "Yes, breakfast is included in the room rate."
+
+    if "airport shuttle" in user_input.lower():
+        return "Yes, we offer complimentary airport shuttle service for our guests."
+
+    if "check-in time" in user_input.lower():
+        return "The standard check-in time is 3:00 PM."
+
+    if "check-out time" in user_input.lower():
+        return "The standard check-out time is 12:00 PM."
+
+    if "room service" in user_input.lower():
+        return "Yes, we provide 24/7 room service for our guests."
+
+    if "parking facilities" in user_input.lower():
+        return "We offer free parking for guests staying at the hotel."
+
+    if "swimming pool" in user_input.lower():
+        return "Yes, we have a swimming pool available for guest use."
+
+    if "gym facilities" in user_input.lower():
+        return "Our hotel has a fully-equipped gym for guests' fitness needs."
+
+    if "pets allowed" in user_input.lower():
+        return "Yes, we allow pets in specific rooms. Please inquire during booking."
+
+    if "late check-out" in user_input.lower():
+        return "Late check-out is subject to availability and may incur an additional charge."
+
+    if "nearby attractions" in user_input.lower():
+        return "There are several attractions, such as museums and parks, within walking distance from the hotel."
+    
+    if "best hotel" in user_input.lower():
+        return "The best hotel at this time is XYZ Hotel."
+
+    if "Wi-Fi facility" in user_input.lower():
+        return "Yes, Wi-Fi is available in all rooms."
+
+    if "rarest hotels" in user_input.lower():
+        return "The rarest hotels are located in ABC location."
+
+    if "cancellation policy" in user_input.lower():
+        return "You can cancel your reservation up to 24 hours before the check-in date without any charges."
+
+    if "breakfast included" in user_input.lower():
+        return "Yes, breakfast is included in the room rate."
+
+    if "airport shuttle" in user_input.lower():
+        return "Yes, we offer complimentary airport shuttle service for our guests."
+
+    if "check-in time" in user_input.lower():
+        return "The standard check-in time is 3:00 PM."
+
+    if "check-out time" in user_input.lower():
+        return "The standard check-out time is 12:00 PM."
+
+    if "room service" in user_input.lower():
+        return "Yes, we provide 24/7 room service for our guests."
+
+    if "parking facilities" in user_input.lower():
+        return "We offer free parking for guests staying at the hotel."
+
+    if "swimming pool" in user_input.lower():
+        return "Yes, we have a swimming pool available for guest use."
+
+    if "gym facilities" in user_input.lower():
+        return "Our hotel has a fully-equipped gym for guests' fitness needs."
+
+    if "pets allowed" in user_input.lower():
+        return "Yes, we allow pets in specific rooms. Please inquire during booking."
+
+    if "late check-out" in user_input.lower():
+        return "Late check-out is subject to availability and may incur an additional charge."
+
+    if "nearby attractions" in user_input.lower():
+        return "There are several attractions, such as museums and parks, within walking distance from the hotel."
+
+    if "room types" in user_input.lower():
+        return "We offer various room types, including standard, deluxe, and suites."
+
+    if "room amenities" in user_input.lower():
+        return "Each room is equipped with amenities like a flat-screen TV, minibar, and coffee maker."
+
+    if "special offers" in user_input.lower():
+        return "We have special offers and discounts for group bookings and extended stays."
+
+    if "breakfast timings" in user_input.lower():
+        return "Breakfast is served from 7:00 AM to 10:00 AM in the dining area."
+
+    if "luggage storage" in user_input.lower():
+        return "We provide complimentary luggage storage for guests before check-in and after check-out."
+
+    if "payment methods" in user_input.lower():
+        return "We accept major credit cards and cash payments at the hotel."
+
+    # Add more hotel-related responses here
+
+    # Default response for unknown hotel queries
+    return "I'm sorry, I don't have information on that. Please ask something else."
+
 
 # Run the Flask app if this script is executed as the main program
 if __name__ == '__main__':
