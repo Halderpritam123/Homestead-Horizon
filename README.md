@@ -1,6 +1,6 @@
 # Homestead-Horizon
 
-Live Demo:[https://64bdab6e5797ba67f576c003--kaleidoscopic-choux-c57581.netlify.app/home](https://kaleidoscopic-choux-c57581.netlify.app/home)
+Live Demo:https://kaleidoscopic-choux-c57581.netlify.app/home
 <br/>
 Backend Link:https://horizon-2pqa.onrender.com/
 <br/>
