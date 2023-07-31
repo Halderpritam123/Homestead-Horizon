@@ -192,8 +192,137 @@ The backend server will now be running at `http://127.0.0.1:5000/`.
 - `Booking`: Model class for a booking with property image, ID, title, price per night, location, booking date, and end date attributes.
 - `get_chatbot_response(user_input)`: Function to handle chatbot responses using OpenAI's GPT-3 model.
 
-## Conclusion
+# Homely Horizons Frontend Documentation
 
-This documentation provides an overview of the Horizon Hotel project's backend. It includes information about the endpoints, request/response formats, and helper functions used in the backend implementation. For more details on each endpoint's functionality, refer to the corresponding sections in this document.
+This documentation provides a comprehensive guide to the frontend implementation of the "Homely Horizons" web application. The frontend is built using modern web technologies, including HTML, CSS, JavaScript, and React.js, to create an interactive and user-friendly experience for users.
 
-If you have any questions or need further assistance, feel free to reach out to the development team.
+## Table of Contents
+
+### Prerequisites
+
+Before running the frontend, ensure that you have the following software installed:
+
+- Node.js
+- npm (Node Package Manager)
+
+### Installation
+
+1. Clone the GitHub repository containing the project code:
+
+```bash
+git clone https://github.com/your-username/homely-horizons.git
+cd homely-horizons
+```
+
+2. Install the required Node.js packages using npm:
+
+```bash
+npm install
+```
+
+3. Set up environment variables:
+
+Create a `.env` file in the root directory of the project and set the necessary environment variables:
+
+```
+REACT_APP_API_BASE_URL=http://your-api-base-url
+REACT_APP_OPENAI_API_KEY=your-openai-api-key
+```
+
+Replace `http://your-api-base-url` with the base URL of your backend API, and `your-openai-api-key` with the API key for OpenAI.
+
+4. Run the development server:
+
+```bash
+npm start
+```
+
+The frontend will now be accessible at `http://localhost:3000/`.
+
+## Folder Structure
+
+```
+homely-horizons/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── Authentication/
+│   │   ├── PropertyManagement/
+│   │   ├── PropertyBrowsing/
+│   │   ├── Booking/
+│   │   ├── ChatbotIntegration/
+│   │   └── ...
+│   ├── api/
+│   ├── assets/
+│   ├── utils/
+│   ├── App.js
+│   └── index.js
+├── .env
+├── package.json
+└── ...
+```
+
+- `public/`: Contains the public files like the main `index.html` file and other static assets.
+- `src/`: Contains the source code for the frontend application.
+- `src/components/`: Contains various reusable components used in different sections of the application.
+- `src/api/`: Contains utility functions for making API requests and handling responses.
+- `src/assets/`: Contains static assets like images, icons, etc.
+- `src/utils/`: Contains utility functions and helper methods used throughout the application.
+- `src/App.js`: The main component representing the application.
+- `src/index.js`: The entry point of the application.
+
+## Components
+
+The frontend is divided into several components, each responsible for a specific section or feature of the application.
+
+### Authentication
+
+- `Login`: Component to handle user login functionality.
+- `SignUp`: Component to handle user registration (sign-up) functionality.
+
+### Property Management
+
+- `HostDashboard`: Component to provide hosts with the ability to manage their properties efficiently.
+- `PropertyForm`: Component to create or update a property listing.
+
+### Property Browsing
+
+- `PropertyList`: Component to display a list of available properties for users to browse.
+- `PropertyCard`: Component to represent a single property in the list.
+
+### Booking
+
+- `BookingForm`: Component to handle the booking process, allowing users to reserve properties based on their preferences.
+
+### Chatbot Integration
+
+- `Chatbot`: Component to integrate and interact with the chatbot functionality.
+
+## Routing
+
+The frontend uses React Router for handling navigation and routing within the application. The main routes are as follows:
+
+- `/login`: Route for user login.
+- `/signup`: Route for user registration.
+- `/host/dashboard`: Route for the host's property management dashboard.
+- `/browse`: Route for property browsing.
+- `/book/:propertyId`: Route for booking a specific property.
+
+## State Management
+
+The frontend uses the React Context API for state management. The global state is managed using context providers and consumers to share data across components.
+
+## API Integration
+
+The frontend communicates with the backend API using various utility functions defined in the `src/api/` directory. These functions handle making HTTP requests and handling responses.
+
+## Payment Integration
+
+The frontend integrates with a payment gateway to facilitate secure and seamless booking transactions. The payment gateway API is called during the booking process to process payments.
+
+## Logging Out
+
+Users can securely log out of their accounts by clicking on the logout option available in the application. Logging out clears the user's session data and redirects them to the login page.
