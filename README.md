@@ -326,3 +326,16 @@ The frontend integrates with a payment gateway to facilitate secure and seamless
 ## Logging Out
 
 Users can securely log out of their accounts by clicking on the logout option available in the application. Logging out clears the user's session data and redirects them to the login page.
+![Screenshot 2023-07-30 164444](https://github.com/Halderpritam123/Homestead-Horizon/assets/115460430/89630e3d-1592-4fef-b3f9-8498ad0884bf)
+![Screenshot 2023-07-31 082552](https://github.com/Halderpritam123/Homestead-Horizon/assets/115460430/57d3bc21-8bd6-483d-8bb4-ec459457bf39)
+![Screenshot 2023-07-31 082606](https://github.com/Halderpritam123/Homestead-Horizon/assets/115460430/40377c43-80f9-495a-bab8-6fe1eaae1713)
+![Screenshot 2023-07-31 082641](https://github.com/Halderpritam123/Homestead-Horizon/assets/115460430/20d18df2-68d7-4642-8bfe-bd3864006fd3)
+![Screenshot 2023-07-31 082914](https://github.com/Halderpritam123/Homestead-Horizon/assets/115460430/c940a60e-9fa0-4a34-a675-62a641325039)
+![Screenshot 2023-07-31 083023](https://github.com/Halderpritam123/Homestead-Horizon/assets/115460430/d3d4132c-5689-49e8-b1fd-db964a8d19eb)
+![Screenshot 2023-07-31 083035](https://github.com/Halderpritam123/Homestead-Horizon/assets/115460430/c4c50d85-0473-4133-a7dc-2062584c7689)
+
+
+
+
+
+
