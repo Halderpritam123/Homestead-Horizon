@@ -27,7 +27,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   fetchProperty(propertyId: string): void {
-    this.http.get<any>('https://horizon-2pqa.onrender.com/api/properties/' + propertyId)
+    this.http.get<any>('https://horizon-project-backend.onrender.com/api/properties/' + propertyId)
       .subscribe(
         (response) => {
           this.property = response;
@@ -52,7 +52,7 @@ export class PropertyDetailComponent implements OnInit {
       cancelButtonText: 'Cancel',
     });
     if (result.isConfirmed) {
-      this.http.delete<any>('https://horizon-2pqa.onrender.com/api/properties/' + this.property.id)
+      this.http.delete<any>('https://horizon-project-backend.onrender.com/api/properties/' + this.property.id)
         .subscribe(
           () => {
             this.showSuccessAlert('Property deleted successfully!');

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookingService {
-  private baseUrl = 'https://horizon-2pqa.onrender.com/api/properties/book'; // Update this URL if your backend URL is different
+  private baseUrl = 'https://horizon-project-backend.onrender.com/api/properties/book'; // Update this URL if your backend URL is different
 
   constructor(private http: HttpClient) { }
 

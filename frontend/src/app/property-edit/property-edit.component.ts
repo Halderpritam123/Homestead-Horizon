@@ -27,7 +27,7 @@ export class PropertyEditComponent implements OnInit {
   }
 
   fetchProperty(propertyId: string): void {
-    this.http.get<any>('https://horizon-2pqa.onrender.com/api/properties/' + propertyId)
+    this.http.get<any>('https://horizon-project-backend.onrender.com/api/properties/' + propertyId)
       .subscribe(
         (response) => {
           this.property = response;
@@ -40,7 +40,7 @@ export class PropertyEditComponent implements OnInit {
 
   updateProperty(): void {
     console.log(this.property);
-    this.http.put<any>('https://horizon-2pqa.onrender.com/api/properties/' + this.property.id, this.property)
+    this.http.put<any>('https://horizon-project-backend.onrender.com/api/properties/' + this.property.id, this.property)
       .subscribe(
         () => {
           this.showSuccessAlert('Property updated successfully!');

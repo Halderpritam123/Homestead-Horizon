@@ -9,8 +9,8 @@ import Swal from 'sweetalert2'; // Import SweetAlert
   styleUrls: ['./host.component.css']
 })
 export class HostComponent implements OnInit {
-  email: string = '';
-  password: string = '';
+  email: string = "pritampritamhalder@gmail.com";
+  password: string = 'Pritam@123';
   errorMessage: string = '';
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -20,7 +20,7 @@ export class HostComponent implements OnInit {
 
   login(): void {
     const loginData = { email: this.email, password: this.password };
-    this.http.post<any>('https://horizon-2pqa.onrender.com/login/host', loginData).subscribe(
+    this.http.post<any>('https://horizon-project-backend.onrender.com/login/host', loginData).subscribe(
       (response: any) => {
         console.log(response);
         localStorage.setItem('userRole', 'host'); // Set userRole to 'host'
@@ -49,7 +49,7 @@ export class HostComponent implements OnInit {
 
   signup(): void {
     const signupData = { email: this.email, password: this.password };
-    this.http.post<any>('https://horizon-2pqa.onrender.com/signup/host', signupData).subscribe(
+    this.http.post<any>('https://horizon-project-backend.onrender.com/signup/host', signupData).subscribe(
       (response: any) => {
         console.log(response);
         this.errorMessage = '';

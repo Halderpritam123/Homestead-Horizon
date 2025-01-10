@@ -20,7 +20,7 @@ export class GuestComponent implements OnInit {
 
   login(): void {
     const loginData = { email: this.email, password: this.password };
-    this.http.post<any>('https://horizon-2pqa.onrender.com/login/guest', loginData).subscribe(
+    this.http.post<any>('https://horizon-project-backend.onrender.com/login/guest', loginData).subscribe(
       (response: any) => {
         console.log(response);
         localStorage.setItem('userRole', 'guest'); // Set userRole to 'guest'
@@ -50,7 +50,7 @@ export class GuestComponent implements OnInit {
     event.preventDefault(); // Prevent the default form submission behavior
 
     const signupData = { email: this.email, password: this.password };
-    this.http.post<any>('https://horizon-2pqa.onrender.com/signup/guest', signupData).subscribe(
+    this.http.post<any>('https://horizon-project-backend.onrender.com/signup/guest', signupData).subscribe(
       (response: any) => {
         console.log(response);
         this.errorMessage = '';

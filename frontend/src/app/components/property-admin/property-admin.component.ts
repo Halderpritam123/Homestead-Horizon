@@ -100,7 +100,7 @@ export class PropertyAdminComponent implements OnInit {
   postProperty(): void {
     console.log(this.propertyData);
     this.http
-      .post<any>('https://horizon-2pqa.onrender.com/api/properties', this.propertyData)
+      .post<any>('https://horizon-project-backend.onrender.com/api/properties', this.propertyData)
       .subscribe(
         (response) => {
           console.log(response); // You can handle the success response here

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PropertyService {
-  private baseUrl = 'https://horizon-2pqa.onrender.com/api/properties'; // Update this URL if your backend URL is different
+  private baseUrl = 'https://horizon-project-backend.onrender.com/api/properties'; // Update this URL if your backend URL is different
   sortBy: string = 'price_per_night'; // Default sort field
   sortOrder: number = 1; // 1 for ascending, -1 for descending
 

@@ -32,7 +32,7 @@ export class PreviewComponent {
   }
 
   fetchProperty(propertyId: string): void {
-    this.http.get<any>('https://horizon-2pqa.onrender.com/api/properties/' + propertyId)
+    this.http.get<any>('https://horizon-project-backend.onrender.com/api/properties/' + propertyId)
       .subscribe(
         (response) => {
           this.property = response;

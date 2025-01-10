@@ -110,7 +110,7 @@ export class PaymentComponent implements OnInit {
     // };
 
     // Make the POST request to book the property
-    this.http.post<any>('https://horizon-2pqa.onrender.com/api/properties/book', this.propertyData).subscribe(
+    this.http.post<any>('https://horizon-project-backend.onrender.com/api/properties/book', this.propertyData).subscribe(
       (response) => {
         // Handle the response after successful booking
         console.log(response);
